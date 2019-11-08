@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Signal Generator</title>
+    {% load static%}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    {% csrf_token %}
+    <script type="text/javascript">
+        // using jQuery
+        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    </script>
+    <link href="{% static 'CurveToSignalApp/css/style.css' %}" rel="stylesheet">
+</head>   
+<body>
+
+    <div class="canvas">
+        <canvas id="myCanvas" width="2000" height="500"></canvas>
+    </div>
+    <div id="coordinates">
+        <p id="xCoord"></p>
+        <p id="yCoord"></p>
+    </div>
+    <div class="button">
+            <button type="button" id="BtnClearCanvas">Clear canvas</button>
+    </div>
+</body>
+<script src="{% static 'CurveToSignalApp/js/drawSignal.js' %}"></script>
+</html>
