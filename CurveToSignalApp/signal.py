@@ -6,15 +6,16 @@ class Signal:
         self.aPoints     = aPoints
         self.__dX        = aPoints[0]
         self.__dY        = aPoints[1]
-        self.__nPeriod   = len(aPoints[0])
+        self.__nN        = len(aPoints[0])
         self.__nNumCoeff = 10
         
     def get_Fourier_coefficients(self):
-        f = self.__dY 
-        T = self.__nPeriod 
-        N = self.__nNumCoeff 
-        acFourierCoeff = self.__fourier_series_coeff_numpy(f, T, N)
+        acFourierCoeff = [self.__get_Fourier_coefficient(k) for k in range(0, self.__nN-1)]
         return acFourierCoeff
+
+    def __get_Fourier_coefficient(self, k):
+        cFourierCoeff = 1./float(self.__nN)*sum([self.__dY[l] * np.exp(-1j*k*l*2*np.pi/self.__nN) for l in range(0, self.__nN-1)])
+        return cFourierCoeff
 
     def __prepare_data(self):
         pass
