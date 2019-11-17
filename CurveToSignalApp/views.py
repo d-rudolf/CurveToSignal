@@ -8,11 +8,13 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def get_points(request):
-    template = loader.get_template('CurveToSignalApp/index.html')
-    context = {}
+    template = loader.get_template('CurveToSignalApp/plot-signal.html')
     asx = request.POST.getlist('x[]')
     asy = request.POST.getlist('y[]')
-    prepare_signal([asx, asy])
+    dX,dY,adYCalc = prepare_signal([asx, asy])
+    context = {'X'    : dX,
+               'Y'    : dY,
+               'YCalc': adYCalc}    
     return HttpResponse(template.render(context, request))
 
 def prepare_signal(points):
@@ -23,5 +25,6 @@ def prepare_signal(points):
         ady = [float(y) for y in asy]
     oSignal = signal.Signal([adx,ady])
     #acFourierCoeff = oSignal.get_Fourier_coefficients()
-    oSignal.calculate_signal_from_Fourier_coeff()
+    adYCalc = oSignal.calculate_signal_from_Fourier_coeff()
     dX,dY = oSignal.dX, oSignal.dY
+    return dX,dY,adYCalc  
