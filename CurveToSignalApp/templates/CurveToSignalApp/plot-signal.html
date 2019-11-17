@@ -14,5 +14,10 @@
 <div class="svg">
     <svg id="svgSignal" width="2000" height="500"></svg>
 </div>
-<script src="{% static 'CurveToSignalApp/js/drawSignal.js' %}"></script>
+<script>
+    var X     = {{X | safe}};
+    var Y     = {{Y | safe}};
+    var YCalc = {{YCalc | safe}};
+</script>
+<script src="{% static 'CurveToSignalApp/js/plotCalcSignal.js' %}"></script>
 {% endblock content %}

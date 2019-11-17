@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Signal Generator</title>
+    {% load static%}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    {% csrf_token %}
+    <script type="text/javascript">
+        // using jQuery
+        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    </script>
+    <link href="{% static 'CurveToSignalApp/css/style.css' %}" rel="stylesheet">
+</head>   
+<body>
+{% block content %}{% endblock content %}
+</body>
+</html>
