@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from . import signal
 
@@ -8,14 +8,14 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def get_points(request):
-    template = loader.get_template('CurveToSignalApp/plot-signal.html')
     asx = request.POST.getlist('x[]')
     asy = request.POST.getlist('y[]')
     dX,dY,adYCalc = prepare_signal([asx, asy])
-    context = {'X'    : dX,
-               'Y'    : dY,
-               'YCalc': adYCalc}    
-    return HttpResponse(template.render(context, request))
+    data = {'X'    : dX.tolist(),
+            'Y'    : dY.tolist(),
+            #'YCalc': adYCalc
+            }    
+    return JsonResponse(data)
 
 def prepare_signal(points):
     asx = points[0]
