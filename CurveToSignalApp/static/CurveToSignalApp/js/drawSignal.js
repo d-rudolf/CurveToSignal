@@ -85,10 +85,19 @@ function getPoints(){
         url: '/CurveToSignalApp/get_points',
         data: dicPointsChecked,
         dataType: 'json',
-        processData: 'true'
+        processData: 'true',
+        success: function(data, textStatus, jqXHR) 
+                {getCalculatedData(data, textStatus, jqXHR);},
+        error: function(xhr,status,error){
+                }
     }
     $.ajax(parameters);
 }
+
+function getCalculatedData(data, textStatus, jqXHR){
+
+}
+
 function clearCanvas(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
