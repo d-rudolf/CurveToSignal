@@ -2,7 +2,7 @@
 {% load static%}
 {% block content %}
 <div class="canvas">
-    <canvas id="myCanvas" width="2000" height="500"></canvas>
+    <canvas id="myCanvas" width="1500" height="500"></canvas>
 </div>
 <div id="coordinates">
     <p id="xCoord"></p>
@@ -12,7 +12,10 @@
         <button type="button" id="BtnClearCanvas">Clear canvas</button>
 </div>
 <div class="svg">
-    <svg id="svgSignal" width="2000" height="500"></svg>
+    <svg id="svgSignal" width="1500" height="500"></svg>
+</div>
+<div class="button">
+    <button type="button" id="BtnExportData">Export data</button>
 </div>
 <script src="{% static 'CurveToSignalApp/js/drawSignal.js' %}"></script>
 {% endblock content %}

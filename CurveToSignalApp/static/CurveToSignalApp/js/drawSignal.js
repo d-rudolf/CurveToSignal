@@ -1,6 +1,7 @@
 
 "use strict";
 var canvas = document.getElementById("myCanvas");
+var svg    = document.getElementById("svgSignal");
 var ctx = canvas.getContext("2d");
 var points = [];
 var dicPointsChecked = {"x": [], "y": []};
@@ -8,7 +9,7 @@ var chart;
 var chartData;
 var calcData;
 
-document.getElementById("BtnClearCanvas").addEventListener("click", clearCanvas); 
+document.getElementById("BtnClearCanvas").addEventListener("click", clear); 
 document.getElementById("BtnExportData").addEventListener("click", exportData); 
 
 
@@ -16,7 +17,7 @@ init();
 
 function init(){
     
-    clearCanvas();
+    clear();
     canvas.addEventListener("mousedown", startEventMouseMove); 
     canvas.addEventListener("mouseup", stopEventMouseMove); 
     ajaxSetup();
@@ -24,7 +25,7 @@ function init(){
 
 
 function startEventMouseMove(){
-    
+    points = [];
     clearCanvas();
     ctx.beginPath()
     ctx.moveTo(event.clientX, event.clientY);
@@ -72,6 +73,8 @@ function writeCoordinates(x,y){
 
 // checks if x is monotonic inceasing
 function checkPoints(){
+    dicPointsChecked["x"] = [];
+    dicPointsChecked["y"] = [];
     var xMax = 0;
     points.forEach(function(item, index, array) {
         var x = item[0];
@@ -152,14 +155,27 @@ function initChart(){
          .tickFormat(d3.format('.02f'));
 }
 
+function clear(){
+    clearCanvas();
+    clearSvg();
+} 
+
 function clearCanvas(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function clearSvg(){
+    var toolTip = document.getElementsByClassName("nvtooltip xy-tooltip nv-pointer-events-none");
+    if (toolTip.length != 0){
+        toolTip[0].remove(); 
+    }
+    $("#svgSignal").empty();
 }
 
 function exportData(){
     var dataStr = JSON.stringify(calcData.adYCalc_real)
     var dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    var exportFileDefaultName = 'CurveToSignal.json';
+    var exportFileDefaultName = 'TestSignal.json';
     var linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportFileDefaultName);

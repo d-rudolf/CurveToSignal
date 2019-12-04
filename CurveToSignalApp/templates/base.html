@@ -5,6 +5,9 @@
     <title>Test Signal Generator</title>
     {% load static%}
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="{% static 'CurveToSignalApp/js/d3.min.js' %}"></script>
+    <link href="{% static 'CurveToSignalApp/css/nv.d3.css' %}" rel="stylesheet">
+    <script src="{% static 'CurveToSignalApp/js/nv.d3.min.js' %}"></script>
     {% csrf_token %}
     <script type="text/javascript">
         // using jQuery
